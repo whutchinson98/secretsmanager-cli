@@ -1,0 +1,21 @@
+name: Code Check
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  code-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Golang
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.18"
+      - name: Test
+        run: make test
+      - name: Build
+        run: make build
